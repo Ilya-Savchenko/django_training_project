@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список новостей</title>
+</head>
+<body>
+    {% if news_sort %}
+        {% for news in news_sort %}
+            {% if news.is_active %}
+                <a href="{% url 'news_list' %}{{ news.id }}"><h2>{{ news.title }}</h2></a>
+                <p>{{  news.editing_at }}<a href="{% url 'edit' %}{{ news.id }}"> (редактировать) </a></p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h2>Новостей нет</h2>
+    {% endif %}
+    <a href="{% url 'news-add' %}">Добавить новость</a>
+</body>
+</html>
