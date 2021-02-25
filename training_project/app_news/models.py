@@ -1,16 +1,20 @@
 from django.db import models
 
 class NewsModel(models.Model):
+	IS_ACTIVE_CHOICES = [('a', 'Активно'), ('i', 'Неактивно')]
+
 	title = models.CharField(max_length=50, verbose_name='Заголовок')
 	content = models.TextField(max_length=2000, verbose_name='Текст статьи')
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
 	editing_at = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
 	is_active = models.BooleanField(default=True, verbose_name='Отображать в ленте')
+	status = models.CharField(max_length=1, choices=IS_ACTIVE_CHOICES, verbose_name='Состояние', default='a')
 
 	def __str__(self):
 		return self.title
 
 class CommentModel(models.Model):
+
 	user_name = models.CharField(max_length=25, verbose_name='Имя пользователя')
 	text = models.TextField(max_length=1000, verbose_name='Комментарий')
 	news = models.ForeignKey(to=NewsModel, on_delete=models.CASCADE, related_name='news')
