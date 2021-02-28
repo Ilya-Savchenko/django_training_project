@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.views import generic
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormView
 
 from .forms import AddedCommentForm
 from .models import NewsModel, CommentModel
@@ -27,29 +27,14 @@ class EditNewsFormView(generic.UpdateView):
 	success_url = '/'
 
 
-class NewsCommentFormView(FormMixin, generic.DetailView):
+class NewsCommentFormView(generic.DetailView, FormView):
 	model = NewsModel
 	context_object_name = 'news'
 	template_name = 'news/news_detail.html'
 	form_class = AddedCommentForm
 
 	def get_success_url(self):
-		return reverse('news-detail', kwargs={'pk': self.object.pk})
-
-	def get_context_data(self, **kwargs):
-		context = super(NewsCommentFormView, self).get_context_data(**kwargs)
-		comments = CommentModel.objects.filter(news_id=self.kwargs['pk']).order_by('-created_at')
-		context['comments'] = comments
-		return context
-
-	def post(self, request, *args, **kwargs):
-		self.object = self.get_object()
-		form = self.get_form()
-
-		if form.is_valid():
-			return self.form_valid(form)
-		else:
-			return self.form_invalid(form)
+		return reverse('news-detail', kwargs={'pk': self.kwargs['pk']})
 
 	def form_valid(self, form):
 		CommentModel.objects.create(news_id=self.kwargs['pk'], **form.cleaned_data)

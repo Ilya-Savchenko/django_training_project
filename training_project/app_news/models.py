@@ -17,7 +17,7 @@ class CommentModel(models.Model):
 
 	user_name = models.CharField(max_length=25, verbose_name='Имя пользователя')
 	text = models.TextField(max_length=1000, verbose_name='Комментарий')
-	news = models.ForeignKey(to=NewsModel, on_delete=models.CASCADE, related_name='news')
+	news = models.ForeignKey(to=NewsModel, on_delete=models.CASCADE, related_name='comments')
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации', db_index=True)
 
 	def __str__(self):

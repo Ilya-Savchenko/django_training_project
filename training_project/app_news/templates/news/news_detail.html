@@ -12,16 +12,12 @@
     <hr>
     <h2>Комментарии</h2>
 
-    {% if comments %}
-        {% for comm in comments %}
-
+    {% for comm in news.comments.all %}
             <p><b>{{ comm.user_name }}</b> - {{ comm.created_at }}</p>
                 <p><i>{{ comm.text }}</i></p>
-
-        {% endfor %}
-    {% else %}
+    {% empty %}
         <h2>Комментариев нет</h2>
-    {% endif %}
+    {% endfor %}
 
     <form method="post" action="">
         {% csrf_token %}
