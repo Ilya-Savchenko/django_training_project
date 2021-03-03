@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Редактировать новость</title>
-</head>
-<body>
+{% extends 'news/base.html' %}
+{% block title %}<title>Редактировать новость</title>{% endblock %}
+{% block content %}
+    <a href="{% url 'news_list' %}">К списку новостей</a>
     <form method="post" action="">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Сохранить</button>
     </form>
-</body>
-</html>
+{% endblock %}
