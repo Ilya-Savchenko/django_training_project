@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ news.title }}</title>
-</head>
-<body>
-<a href="{% url 'news_list' %}">К списку новостей</a>
+{% extends 'news/base.html' %}
+{% block title %}<title>{{ news.title }}</title>{% endblock %}
+
+{% block content %}
+    <a href="{% url 'news_list' %}">К списку новостей</a>
     <h1>{{ news.title }}</h1>
     <h3>{{ news.content }}</h3>
     <p>Последнее обновление: {{ news.editing_at }}</p>
@@ -13,16 +10,23 @@
     <h2>Комментарии</h2>
 
     {% for comm in news.comments.all %}
-            <p><b>{{ comm.user_name }}</b> - {{ comm.created_at }}</p>
-                <p><i>{{ comm.text }}</i></p>
+        <p><b>{% if comm.user_id %}
+            {{ comm.user.username }}
+        {% else %}
+            {{ comm.user_name }}
+        {% endif %}</b> - {{ comm.created_at }}</p>
+        <p><i>{{ comm.text }}</i></p>
     {% empty %}
         <h2>Комментариев нет</h2>
     {% endfor %}
 
     <form method="post" action="">
         {% csrf_token %}
+        <h3>Оставить комментарий
+            {% if request.user.is_authenticated %} - {{ request.user.username }}
+            {% endif %}
+        </h3>
         {{ form.as_p }}
         <button type="submit">Добавить комментарий</button>
     </form>
-</body>
-</html>
+{% endblock %}

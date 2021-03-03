@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Сайт новостей</title>{% endblock %}
+</head>
+<body>
+{% block header %}
+    {% if request.user.is_authenticated %}
+              <p>Добро пожаловать, {{ request.user.username }} <a href="{% url 'logout' %}">(выйти из аккаунта)</a></p>
+         {% else %}
+              <a href="{% url 'login' %}">Вход</a>
+         {% endif %}
+{% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

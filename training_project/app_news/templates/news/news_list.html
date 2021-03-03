@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Список новостей</title>
-</head>
-<body>
-{% if request.user.is_authenticated %}
-    <p>Добро пожаловать, {{ request.user.username }} <a href="{% url 'logout' %}">(выйти из аккаунта)</a></p>
-{% else %}
-    <a href="{% url 'login' %}">Вход</a>
-{% endif %}
+{% extends 'news/base.html' %}
+{% block title %}<title>Последние новости</title>{% endblock %}
+{% block content %}
     {% if news_sort %}
         {% for news in news_sort %}
             {% if news.is_active %}
@@ -21,5 +12,4 @@
         <h2>Новостей нет</h2>
     {% endif %}
     <a href="{% url 'news-add' %}">Добавить новость</a>
-</body>
-</html>
+{% endblock %}
