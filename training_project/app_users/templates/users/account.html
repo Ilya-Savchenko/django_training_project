@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+{% block title %}
+    <title>{{ user.first_name }} {{ user.last_name }}</title>
+{% endblock %}
+{% block content %}
+    <p>Логин: {{ request.user.username }}</p>
+    <p>Имя: {{ request.user.first_name }}</p>
+    <p>Фамилия: {{ request.user.last_name }}</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>День рождения: {{ request.user.profile.day_of_birth }}</p>
+    <p>Город: {{ request.user.profile.city }}</p>
+    <p>Номер карты: {{ request.user.profile.card_number }}</p>
+    <p>Номер телефона: {{ request.user.profile.phone_number }}</p>
+{% endblock %}

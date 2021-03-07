@@ -1,12 +1,12 @@
 {% extends 'users/base.html' %}
 {% block title %}
-    <title>Вход на сайт</title>
+    <title>Регистрация пользователя</title>
 {% endblock %}
 {% block content %}
-    <h1>Войти в аккаунт</h1>
+    <h2>Введите ваши данные</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button type="submit">Регистрация</button>
     </form>
 {% endblock %}
