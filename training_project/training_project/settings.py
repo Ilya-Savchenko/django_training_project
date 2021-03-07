@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'app_news',
 	'app_users',
+	'app_employment',
 ]
 
 MIDDLEWARE = [
