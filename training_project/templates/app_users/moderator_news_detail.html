@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ news.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <h4>Заголовок</h4>
+    <p>{{ news.title }}</p>
+    <h4> Содержание статьи:</h4>
+    <p>{{ news.content }}</p>
+    <hr>
+    <p>Автор: {{ news.author }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Опубликовать</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Самые свежие новости</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Самые свежие новости</h1>
+
+     <form >
+        <select name="tag">
+            <option disabled="true" selected> Выберите тег интересующих новостей </option>
+            {% for tag in tags %}
+                <option>{{ tag }}</option>
+            {% endfor %}
+        </select>
+        <select name="date">
+            <option disabled="true" selected> Выберите дату новостей </option>
+            {% for date in dates %}
+                <option>{{ date }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="OK">
+    </form>
+
+    {% if news_list %}
+        {% for news in news_list %}
+            <hr>
+            <div>
+                <h2><a href={% url 'news-detail' news.id %}>{{ news.title }}</a></h2>
+                <p>Автор:<b>{{ news.author }}</b>, {{ news.editing_at }}</p>
+                <p>tag: {{ news.tag }}</p>
+                {% if moderator %}
+                    <p><i><a href={% url 'news-update' news.id %}>редактировать новость</a></i></p>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>Новостей нет</h2>
+    {% endif %}
+    <hr>
+
+
+
+    {% if verified %}
+        <a href="{% url 'add_news' %}">Добавить новость</a>
+    {% else %}
+        <p><i>Чтобы получить возможность публиковать новости необходимо быть верифицированным пользователем</i></p>
+    {% endif %}
+{% endblock %}

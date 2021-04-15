@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        {% block title %}
+            <title>Сайт новостей</title>
+        {% endblock %}
+    </head>
+    <body>
+{% endblock %}
+
+
+{% block to_home %}{% endblock %}
+
+
+{% block navigation %}
+    {% if request.user.is_authenticated %}
+        <p>Добро пожаловать, {{ request.user.username }} <a href="{% url 'logout' %}">(выйти из аккаунта)</a></p>
+        <p><a href="{% url 'profile' %}">Профайл</a></p>
+    {% else %}
+
+        <a href="{% url 'registration' %}">Регистрация</a>
+        <a href="{% url 'login' %}">Вход</a>
+    {% endif %}
+    <a href="{% url 'news_list' %}">Главная страница</a>
+    {% if moderator %}
+        <a href={% url 'moderator-page' %}>Страница модератора</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

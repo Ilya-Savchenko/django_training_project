@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ request.user.username }}</title>
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <p>Логин: {{ request.user.username }}</p>
+    <p>Имя: {{ request.user.first_name }}</p>
+    <p>Фамилия: {{ request.user.last_name }}</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>Номер телефона: {{ request.user.usersmodel.phone_number }}</p>
+    <p>Город: {{ request.user.usersmodel.city }}</p>
+    <p>Статус верификации:
+        {% if request.user.usersmodel.is_verified %}
+            Верифицирован
+        {% else %}
+            Верификация не пройдена
+        {% endif %}
+    <p>Опубликованные новости: {{ request.user.usersmodel.published_news }}</p>
+
+{% endblock %}

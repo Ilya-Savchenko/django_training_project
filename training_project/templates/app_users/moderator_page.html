@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        <li><a href={% url 'moderator-page-users' %}>Неверифицированные пользователи</a></li>
+        <li><a href={% url 'moderator-page-news' %}>Новости на модерации</a></li>
+    </ul>
+{% endblock %}

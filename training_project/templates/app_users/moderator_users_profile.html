@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <hr>
+    <p>Логин: {{ user_info.id }}</p>
+    <p>Имя: {{ user_info.first_name }}</p>
+    <p>Фамилия: {{ user_info.last_name }}</p>
+    <p>Email: {{ user_info.email }}</p>
+    <p>Номер телефона: {{ user_info.usersmodel.phone_number }}</p>
+    <p>Город: {{ user_info.usersmodel.city }}</p>
+
+     <form method="post">
+        {% csrf_token %}
+        <button type="submit" >Верифицировать</button>
+    </form>
+{% endblock %}

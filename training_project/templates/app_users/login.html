@@ -1,9 +1,11 @@
-{% extends 'users/base.html' %}
+{% extends 'base.html' %}
+
 {% block title %}
-    <title>Вход на сайт</title>
+    <title>Вход</title>
 {% endblock %}
+
 {% block content %}
-    <h1>Войти в аккаунт</h1>
+    <h2>Вход в аккаунт</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

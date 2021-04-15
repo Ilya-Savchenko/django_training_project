@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if users_list %}
+        {% for user in users_list %}
+            <p>
+                {{ user.user.username }} - {{ user.user.first_name }} {{ user.user.last_name }} -
+                <a href="{% url 'moderator-page-user-detail' user.user_id %}">подробнее</a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h2>Все пользователи верифицированы</h2>
+    {% endif %}
+
+{% endblock %}

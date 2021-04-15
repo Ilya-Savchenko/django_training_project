@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if news_list %}
+        {% for news in news_list %}
+            <p>
+                {{ news.title }} - {{ news.author }} - {{ news.created_at }} -
+                <a href="{% url 'moderator-page-news-detail' news.id %}">смотреть новость</a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h3>Новостей на модерации нет</h3>
+    {% endif %}
+{% endblock %}

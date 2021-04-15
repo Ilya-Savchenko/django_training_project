@@ -37,7 +37,6 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'app_news',
 	'app_users',
-	'app_employment',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +54,7 @@ ROOT_URLCONF = 'training_project.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [],
+		'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
